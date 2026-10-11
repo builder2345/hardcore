@@ -27,7 +27,7 @@
 }
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); overflow: hidden; }
-body { font-size: 14px; }
+body { font-size: 14px; word-break: keep-all; overflow-wrap: anywhere; }
 button { font-family: inherit; }
 
 #game { position: fixed; inset: 0; background: var(--bg); overflow: hidden; }

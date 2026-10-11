@@ -423,7 +423,7 @@ HC.Enemy = (function () {
         HC.Audio.play('roar');
         HC.FX.ring(e.x + e.w / 2, e.y + e.h / 2, 160, '#ffffff', 0.6, 3);
         if (G.save.settings.shake) HC.Render.shake(G.cam, 8, 0.8);
-        HC.UI.toast(e.def.n + ' — 광폭해진다', 2);
+        HC.UI.toast(U.josa(e.def.n, '이', '가') + ' 미쳐 날뛴다', 2);
         e.stagger = 1.0;
       }
     }

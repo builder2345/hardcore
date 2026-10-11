@@ -80,7 +80,7 @@ HC.SKILLS = {
   // ── 2층 상위 ──
   queenSting: { n: '여왕의 독침', kind: 'proj', cd: 6, count: 3, spread: 0.18, speed: 520, mult: 1.0, pierce: 1, status: { poison: [6, 0.5] }, sprite: 'needle', col: '#b0ff60', d: '맹독 침 세 개를 부채꼴로 쏜다.' },
   ashVeil: { n: '잿빛 장막', kind: 'field', cd: 18, radius: 110, dur: 6, slow: 0.3, vuln: 0.15, dot: 0.25, col: '#a08070', d: '재가 휘몰아쳐 적을 느리게 하고 태운다.' },
-  coreBeam: { n: '핵 광선', kind: 'beam', cd: 14, len: 260, mult: 3.2, col: '#ffb060', d: '골렘의 핵에서 뜨거운 광선을 쏜다.' },
+  coreBeam: { n: '핵 광선', kind: 'beam', cd: 14, len: 260, mult: 3.2, col: '#ffb060', d: '가슴의 용암 심장에서 뜨거운 광선을 쏜다.' },
   ashCrown: { n: '재의 왕관', kind: 'nova', cd: 15, radius: 120, mult: 2.6, status: { burn: [4, 0.4] }, col: '#ff7030', d: '불붙은 재를 사방으로 폭발시킨다.' },
   sandMaw: { n: '모래 아가리', kind: 'burrow', cd: 12, range: 260, mult: 3.0, col: '#c0a070', d: '모래 속에서 적을 삼키듯 솟구친다.' },
   shieldBash: { n: '방패 강타', kind: 'dashStrike', cd: 7, dist: 80, mult: 2.0, stun: 1.0, armor: true, col: '#c0c0c0', d: '방패로 들이받아 1초 기절.' },
@@ -138,7 +138,7 @@ HC.PASSIVES = {
   fallenWing: { n: '타락한 날개', d: '공중 점프 +1회 (3단 점프)', extraJump: 1 },
   mirror: { n: '거울', d: '기본 공격이 8% 확률로 한 번 더 들어간다', echo: 0.08 },
   knightOath: { n: '망령 기사', d: '회피하며 지나간 적에게 피해', dashDmg: 0.8 },
-  harpy: { n: '하피의 발톱', d: '공중 공격 피해 +25%', airDmg: 0.25 },
+  harpy: { n: '늑대인간의 발톱', d: '공중 공격 피해 +25%', airDmg: 0.25 },
   statue: { n: '석상', d: '넉백 면역, 물리 피해 -5%', mods: { physDR: 0.05 }, noKnock: true },
   assassin: { n: '자객', d: '적의 등 뒤를 공격하면 피해 +30%', backstab: 0.3 },
   ashborn: { n: '재에서 난 자', d: '화상 면역, 피해 +8%', mods: { dmgPct: 0.08 }, immune: ['burn'] },

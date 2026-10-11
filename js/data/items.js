@@ -8,14 +8,14 @@ HC.ITEMS = {};
   mat('goblinEar', '잔귀의 귀', 6, '말린 귀. 혈문 각인 재료.', '#7a8a5a');
   mat('wolfFang', '칼이빨', 8, '늑대의 칼날 같은 송곳니.', '#d0d0c0');
   mat('gnomeHeart', '흙심장', 9, '굴토인의 굳은 심장. 흙냄새가 난다.', '#8a6a40');
-  mat('rotFlesh', '썩은 살점', 5, '송장의 살. 요리와 연금에 쓰인다… 정말로.', '#6a7a4a');
+  mat('rotFlesh', '썩은 살점', 5, '송장의 살. 비위만 버티면 요리에도 연금에도 들어간다.', '#6a7a4a');
   mat('blueShard', '청석 파편', 12, '청석 결정 조각. 은은하게 빛난다.', '#62c8ff');
   mat('glowMoss', '청석 이끼', 7, '결정 근처에서 자라는 이끼. 물약의 기본 재료.', '#5ab0a0', 'herb');
   // 2층
-  mat('lizardScale', '재비늘', 22, '도마뱀인의 단단한 비늘.', '#8a9a60');
-  mat('scorpShell', '전갈 갑각', 26, '독이 배어 있는 갑각.', '#6a4a30');
+  mat('lizardScale', '녹슨 견갑', 22, '약탈자들이 어깨에 걸치던 쇳조각. 녹을 벗기면 쓸 만하다.', '#8a9a60');
+  mat('scorpShell', '거미 갑각', 26, '독이 배어 있는 갑각.', '#6a4a30');
   mat('ashEssence', '망령의 재', 30, '흩어진 망령이 남긴 재.', '#a09890');
-  mat('golemCore', '골렘 핵 조각', 34, '아직 따뜻한 돌.', '#ffb060');
+  mat('golemCore', '오우거 심장석', 34, '오우거 가슴에 박혀 있던 돌. 아직 따뜻하다.', '#ffb060');
   mat('emberHerb', '잿꽃', 18, '재 속에서 피는 꽃.', '#ff7040', 'herb');
   // 3층
   mat('noose', '썩은 밧줄', 60, '목매단 시체의 밧줄.', '#8a7a5a');
@@ -25,7 +25,7 @@ HC.ITEMS = {};
   mat('mistCap', '안개버섯', 45, '안개를 머금은 버섯.', '#c0d0c0', 'herb');
   // 4층
   mat('statueChip', '석상 조각', 160, '살아 있던 돌.', '#a0a0b0');
-  mat('harpyPlume', '하피 깃털', 150, '바람을 기억하는 깃털.', '#c0b0e0');
+  mat('harpyPlume', '늑대인간 갈기', 150, '은빛이 도는 뻣뻣한 털. 비린내가 빠지지 않는다.', '#c0b0e0');
   mat('phantomSteel', '망령 강철', 220, '반쯤 투명한 금속.', '#9ab0ff');
   mat('shadowSilk', '그림자 비단', 210, '손에 쥐면 사라질 것 같다.', '#504060');
   mat('starMoss', '별이끼', 120, '떨어진 별빛에서 자란 이끼.', '#e8e0ff', 'herb');
@@ -100,7 +100,7 @@ HC.ACCS = {
   steelRing: { n: '망령 강철 반지', slot: 'ring', mods: { str: 18, pen: 8 }, cost: { phantomSteel: 10, scarMark: 8 }, kron: 90000 },
   heartNeck: { n: '재앙의 심장 목걸이', slot: 'neck', mods: { str: 8, agi: 8, vit: 8, spr: 8, dmgPct: 0.12 }, cost: { calamityHeart: 1, lordSigil: 2, riftStone: 2 }, kron: 150000 },
 };
-// 각인 유물 (원작 '넘버즈'를 대체). 파수꾼/재앙에게서만.
+// 각인 유물. 파수꾼과 재앙에게서만 나온다.
 HC.RELICS = {
   r0071: { no: '0071', n: '굶주린 손가락', mods: { hpPct: -0.1 }, onKillHeal: 0.03, d: '처치 시 체력 3% 회복. 최대 체력 -10%.' },
   r0213: { no: '0213', n: '반쯤 녹은 시계', mods: { cdr: 0.2, staRegenPct: -0.2 }, d: '스킬 재사용 대기 -20%. 기력 회복 -20%.' },

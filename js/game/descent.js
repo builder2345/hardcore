@@ -75,7 +75,7 @@ HC.Descent = (function () {
       G.save.stats.descents++;
       enterZone('hub', null);
       const F = HC.FLOORS[floor];
-      HC.UI.banner(floor + '층 — ' + F.n, F.desc, '#c8c0b0', 4);
+      HC.UI.banner(floor + '층 ' + F.n, F.desc, '#c8c0b0', 4);
       if (G.save.wounded) HC.UI.toast('중상을 입은 몸이다. 최대 체력 -25%', 3);
       if (G.run.tonic) HC.UI.toast('투지의 영약을 마셨다. 피해 +15%', 2.5);
     }
@@ -115,7 +115,7 @@ HC.Descent = (function () {
     if (lairP) lairP.hidden = !run.lordAwake;
     // 열극 입구
     if (run.rift.state === 'open' && run.rift.zone === zid) {
-      z.portals.push({ kind: 'rift', x: run.rift.x, y: run.rift.y, to: 'rift', label: '붉은 열극 — 들어가면 파수꾼을 죽이기 전엔 못 나온다' });
+      z.portals.push({ kind: 'rift', x: run.rift.x, y: run.rift.y, to: 'rift', label: '붉은 열극. 한번 들어가면 파수꾼을 죽여야 나온다' });
     }
     // 보스 배치
     if (zid === 'lair' && run.lordAwake) spawnBoss(HC.FLOORS[run.floor].lord.id, 'lord');
@@ -190,8 +190,8 @@ HC.Descent = (function () {
     HC.Audio.play('alarm');
     HC.Render.shake(G.cam, 8, 1.5);
     const fieldTxt = { abyssFog: '심연의 안개가 깔렸다. 빛에서 멀어지면 영혼 스킬이 봉인된다.', ashStorm: '잿빛 폭풍이 분다. 시야가 좁아지고 회복이 반감된다.', wailing: '숲이 곡을 한다. 빛이 없는 곳에 머물면 공포가 쌓인다.', starfall: '하늘에서 별이 떨어진다. 붉은 표식을 피하라.' }[run.lordField];
-    HC.UI.banner('층주가 깨어났다', def.n + ' — ' + fieldTxt, '#b070ff', 5);
-    HC.UI.log('층주 ' + U.josa(def.n, '이', '가') + ' 깨어났다. 몬스터가 잠식되었다.');
+    HC.UI.banner(U.josa(def.n, '이', '가') + ' 깨어났다', fieldTxt, '#b070ff', 5);
+    HC.UI.log('층주 ' + U.josa(def.n, '이', '가') + ' 깨어났다. 몬스터들이 잠식됐다.');
     // 현재 구역 몬스터 잠식
     for (const e of G.enemies.slice()) {
       if (e.dead || e.boss || e.elite || e.def.corrupt || e.def.summonOnly) continue;
@@ -267,7 +267,7 @@ HC.Descent = (function () {
       HC.Audio.play('alarm');
       HC.Render.shake(G.cam, 10, 2);
       HC.UI.banner('층의 재앙', U.josa(def.n, '이', '가') + ' ' + HC.World.zoneName(run.floor, run.calamity.zone) + '에 나타났다', '#ff3040', 5);
-      HC.UI.log('층의 재앙 — ' + def.n + ' (' + HC.World.zoneName(run.floor, run.calamity.zone) + ')');
+      HC.UI.log('층의 재앙 ' + U.josa(def.n, '이', '가') + ' ' + HC.World.zoneName(run.floor, run.calamity.zone) + '에 나타났다');
       if (run.zone === run.calamity.zone) spawnBoss(def.id, 'calamity');
     }
     // 열극
@@ -278,8 +278,8 @@ HC.Descent = (function () {
       const s = HC.World.randSpawn(tmp, null, (s) => !s.plat);
       run.rift = { state: 'open', zone: zid, x: s ? s.x : tmp.w * TS / 2, y: s ? s.y : (tmp.h - 5) * TS, closeAt: run.t + DAY() * 1.5 };
       HC.UI.banner('열극', HC.World.zoneName(run.floor, zid) + ' 어딘가에서 붉은 열극이 열렸다', '#ff5060', 4);
-      HC.UI.log('열극 — ' + F.rift.n + ' (' + HC.World.zoneName(run.floor, zid) + ', 1.5일 뒤 닫힘)');
-      if (run.zone === zid) z.portals.push({ kind: 'rift', x: run.rift.x, y: run.rift.y, to: 'rift', label: '붉은 열극 — 들어가면 파수꾼을 죽이기 전엔 못 나온다' });
+      HC.UI.log(HC.World.zoneName(run.floor, zid) + '에 ' + U.josa(F.rift.n, '이', '가') + ' 열렸다. 하루 반 뒤에 닫힌다');
+      if (run.zone === zid) z.portals.push({ kind: 'rift', x: run.rift.x, y: run.rift.y, to: 'rift', label: '붉은 열극. 한번 들어가면 파수꾼을 죽여야 나온다' });
     }
     if (run.rift.state === 'open' && run.t >= run.rift.closeAt) {
       run.rift.state = 'closed';
@@ -326,7 +326,7 @@ HC.Descent = (function () {
     if (e.def.kind === 'lord') {
       run.lordAwake = false; run.lordKilled = true; run.lordHp = null;
       save.flags.lordKilled[run.floor] = (save.flags.lordKilled[run.floor] || 0) + 1;
-      HC.UI.banner('층주를 쓰러뜨렸다', e.def.n + ' — 잠식이 걷힌다', '#d0a0ff', 4);
+      HC.UI.banner(U.josa(e.def.n, '을', '를') + ' 쓰러뜨렸다', '층을 덮고 있던 잠식이 걷힌다', '#d0a0ff', 4);
       HC.UI.log('층주 ' + e.def.n + ' 처치');
       revealExit();
       HC.UI.bossBar(null);
@@ -387,8 +387,8 @@ HC.Descent = (function () {
     const def = HC.getMob(el.id);
     const s = HC.World.randSpawn(z, null, (s) => Math.abs(s.x - U.cx(p)) > 90 && Math.abs(s.x - U.cx(p)) < 260 && Math.abs(s.y - (p.y + p.h)) < 120) || { x: U.cx(near), y: near.y + near.h };
     const e = HC.World.spawnMob(def, s.x, s.y, { aggro: true, spawnT: 1.0, noHang: true });
-    HC.UI.banner('이형 출현', def.n, '#ff6040', 3);
-    HC.UI.log('이형 출현 — ' + def.n);
+    HC.UI.banner(U.josa(def.n, '이', '가') + ' 나타났다', '', '#ff6040', 3);
+    HC.UI.log('이형 ' + U.josa(def.n, '이', '가') + ' 나타났다');
     HC.Audio.play('roar');
     HC.Render.shake(G.cam, 6, 0.8);
     HC.FX.ring(U.cx(e), U.cy(e), 60, '#ff6040', 0.6, 3);
@@ -486,7 +486,7 @@ HC.Descent = (function () {
       initFloor(run, run.floor + 1);
       enterZone('hub', null);
       const F = HC.FLOORS[run.floor];
-      HC.UI.banner(run.floor + '층 — ' + F.n, F.desc, '#c8c0b0', 4);
+      HC.UI.banner(run.floor + '층 ' + F.n, F.desc, '#c8c0b0', 4);
       HC.UI.log(run.floor + '층 진입');
       HC.Audio.ambience(F.amb);
       checkpoint();

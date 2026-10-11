@@ -86,7 +86,7 @@ HC.Game = (function () {
     while (s.level < HC.MAX_LEVEL && s.exp >= HC.EXP_TABLE[s.level + 1]) {
       s.level++;
       HC.Audio.play('levelup');
-      HC.UI.banner('레벨 ' + s.level, '영혼이 한 겹 더 깊어졌다. 영혼 슬롯 ' + s.level + '칸, 혼력 상승', '#ffe0a0', 3);
+      HC.UI.banner('레벨 ' + s.level, '영혼을 하나 더 담을 수 있다 (' + s.level + '칸). 혼력도 올랐다', '#ffe0a0', 3);
       if (G.player) { G.player.statDirty = true; HC.Player.recalc(G.player); G.player.hp = G.player.st.maxHp; }
       HC.FX.burst(G.player.x + 6, G.player.y + 13, 40, ['#ffe0a0', '#ffffff'], { g: -80, min: 40, max: 160, glow: true });
     }

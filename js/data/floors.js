@@ -27,7 +27,7 @@ HC.FLOORS = [
     hubMobs: { goblin: 2, fangWolf: 1 },
     density: 1, objects: { crystal: 5, herb: 3, hidden: 1 }, herb: 'glowMoss', frag: 'frag1',
     elites: [
-      { id: 'urg', branch: 'N', cond: { type: 'kills', mob: 'goblin', n: 25 }, chance: 0.06, hint: '잔귀(해골)를 오래 학살하면, 무덤을 지키던 오우거가 참지 못하고 나선다.' },
+      { id: 'urg', branch: 'N', cond: { type: 'kills', mob: 'goblin', n: 25 }, chance: 0.06, hint: '해골을 오래 부수고 다니면, 무덤을 지키던 오우거가 참다못해 나선다.' },
       { id: 'whiteFang', branch: 'E', cond: { type: 'night', mob: 'fangWolf' }, chance: 0.1, hint: '밤에 늑대를 죽이면, 그 울음을 듣고 흰 것이 온다.' },
       { id: 'gnomeQueen', branch: 'W', cond: { type: 'objects', obj: 'crystal', n: 3, mob: 'gnome' }, chance: 0.35, hint: '굴토인들은 청석 결정을 신성하게 여긴다. 세 개쯤 깨부수면 그들이 섬기는 두꺼비 여왕이 화를 낸다.' },
       { id: 'bloatGhoul', branch: 'S', cond: { type: 'status', status: 'poison', mob: 'ghoul' }, chance: 0.1, hint: '중독된 채로 송장을 쓰러뜨리면, 웅덩이 바닥의 것이 냄새를 맡는다.' },
@@ -86,7 +86,7 @@ HC.FLOORS = [
     branches: {
       W: { n: '서쪽 석상 회랑', mobs: { statueGuard: 4, harpy: 2 }, shape: 'tall' },
       E: { n: '동쪽 망령 기사단', mobs: { phantomKnight: 4, shadowAssassin: 1 }, shape: 'wide' },
-      N: { n: '북쪽 하피 첨탑', mobs: { harpy: 5, statueGuard: 1 }, shape: 'tall' },
+      N: { n: '북쪽 늑대인간 첨탑', mobs: { harpy: 5, statueGuard: 1 }, shape: 'tall' },
       S: { n: '남쪽 그림자 낙하로', mobs: { shadowAssassin: 4, phantomKnight: 1 }, shape: 'deep' },
     },
     hubMobs: { harpy: 1, statueGuard: 1 },

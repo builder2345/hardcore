@@ -224,7 +224,7 @@ HC.Panels = (function () {
       '<div class="title-inner">' +
       '<p class="t-eyebrow">하드코어 횡스크롤 생존기</p>' +
       '<h1 class="t-title">나락 강하</h1>' +
-      '<p class="t-lead">한 달에 한 번, 강하 광장의 문이 열린다. 내려간 자는 층이 닫힐 때까지 살아남아야 돌아온다.<br>죽은 자는 가진 것을 전부 나락에 두고 온다.</p>' +
+      '<p class="t-lead">강하 광장의 석문 아래로 내려가면 층이 닫힐 때까지 버텨야 돌아올 수 있다.<br>거기서 죽으면 가져간 건 전부 나락 몫이 된다.</p>' +
       (!HC.Assets.ready ? '<p class="t-load">그림을 불러오는 중… <span id="load-pct">' + Math.round(HC.Assets.progress * 100) + '%</span></p>' : howto ? controlsHtml() :
         '<div class="t-btns">' +
         (has ? btn('이어하기', 'cont', '', { cls: 'primary' }) : '') +
@@ -242,18 +242,17 @@ HC.Panels = (function () {
       '<div><kbd>↑</kbd><kbd>↓</kbd> 밧줄 오르내리기 · <kbd>↑</kbd> 포탈/문</div><div><kbd>↓</kbd>+<kbd>Space</kbd> 발판 아래로</div>' +
       '<div><kbd>X</kbd> 공격 (연타 시 콤보)</div><div><kbd>Z</kbd>/<kbd>Shift</kbd> 회피 (무적, 기력 소모)</div>' +
       '<div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd> 영혼 스킬</div><div><kbd>Q</kbd> 물약 · <kbd>T</kbd> 탈출 부적</div>' +
-      '<div><kbd>E</kbd> 줍기/채집/파기 · <kbd>R</kbd> 모닥불 휴식</div><div><kbd>I</kbd> 장비·가방 · <kbd>K</kbd> 영혼 · <kbd>M</kbd> 지도 · <kbd>Esc</kbd> 메뉴</div>' +
+      '<div><kbd>E</kbd> 채집/파내기 · <kbd>R</kbd> 모닥불 휴식</div><div><kbd>I</kbd> 장비·가방 · <kbd>K</kbd> 영혼 · <kbd>M</kbd> 지도 · <kbd>Esc</kbd> 메뉴</div>' +
       '</div>';
   }
 
-  BUILD.intro = () => ({ title: '카르덴에 온 것을 환영한다', sub: '회색 비가 그치지 않는 도시', noRes: true, body:
+  BUILD.intro = () => ({ title: '카르덴', sub: '회색 비가 그치지 않는 도시', noRes: true, body:
     '<div class="prose">' +
-    '<p>이 도시는 나락으로 먹고산다. 강하 광장의 문을 지나면 <b>1층 청석 동굴</b>이 나온다. 층마다 정해진 날이 지나면 <b>층이 닫히고</b>, 나락은 그때까지 살아 있는 탐색자를 도시로 뱉어낸다. 살아서 뱉어진 자만 들고 간 것을 가져온다.</p>' +
-    '<p>몬스터는 쓰러지면 재가 되어 <b>흑석</b>을 남긴다. 아주 드물게 <b>영혼</b>을 남긴다. 영혼을 흡수하면 그 몬스터의 능력치와 스킬을 얻는다. 영혼은 색에 따라 주는 스킬이 다르고, 좋은 것만 주지는 않는다. 담을 수 있는 영혼은 <b>레벨 수만큼</b>이다.</p>' +
-    '<p>층에는 조건이 맞아야 나타나는 <b>이형</b>, 깨어나면 층 전체를 잠식하는 <b>층주</b>, 그리고 그보다 훨씬 강한 <b>층의 재앙</b>이 있다. 드물게 열리는 <b>열극</b>에 들어가면 파수꾼을 죽이기 전엔 나올 수 없다.</p>' +
-    '<p>죽으면 들고 있던 흑석·재료·영혼 구슬·물약을 모두 잃고 <b>중상</b>을 입은 채 깨어난다. 다시 시작할 필요는 없다. 다만 아프다.</p>' +
-    '<p>먼저 <b>잡화점</b>에서 물약을 확인하고, 오른쪽 끝 <b>강하 광장</b>으로 가라. 왼쪽의 훈련 인형으로 손을 풀어도 된다.</p>' +
-    '</div>' + controlsHtml() + '<div class="t-btns">' + btn('알겠다', 'close', '', { cls: 'primary' }) + '</div>' });
+    '<p>카르덴 사람들은 나락에서 캐 온 걸로 먹고산다. 도시 오른쪽 끝 강하 광장의 석문을 넘으면 1층 청석 동굴로 떨어진다.</p>' +
+    '<p>층은 정해진 날수가 지나면 닫힌다. 그때까지 버틴 사람은 짐을 진 채로 도시에 내던져지고, 버티지 못한 사람은 가진 걸 몽땅 잃고 치료소에서 눈을 뜬다. 몸도 성하지 않아서 다음번엔 체력이 깎인 채로 내려가야 한다.</p>' +
+    '<p>몬스터를 잡으면 흑석이 나오고, 운이 좋으면 영혼도 떨어진다. 영혼을 몸에 담으면 그 몬스터의 힘을 얻는데, 달갑지 않은 것까지 딸려 온다. 몇 개까지 담을 수 있는지는 레벨에 달렸다.</p>' +
+    '<p>내려가기 전에 잡화점에서 물약부터 챙겨라. 손이 덜 풀렸으면 왼쪽 훈련 인형이라도 두들기고.</p>' +
+    '</div>' + controlsHtml() + '<div class="t-btns">' + btn('나간다', 'close', '', { cls: 'primary' }) + '</div>' });
 
   BUILD.offline = (o) => {
     const gains = Object.keys(o.gains).map((k) => ITEM(k).n + ' ' + U.fmt(o.gains[k])).join(', ') || '없음 (일꾼을 배치하지 않았다)';
@@ -388,7 +387,7 @@ HC.Panels = (function () {
         h += row(E(A.n) + ' <span class="tag">' + (A.slot === 'ring' ? '반지' : '목걸이') + '</span>', modsText(A.mods), HC.Sub.costText(A.cost, A.kron), btn('제작', 'craftAcc', id, { dis: !HC.Sub.has(A.cost, A.kron) }));
       }
     } else if (t === 'enh') {
-      h += '<div class="prose"><p>강화 단계마다 장비 능력 +8%. +4부터는 실패하면 단계가 떨어지고, +7부터는 실패 시 30% 확률로 <b>부서진다</b>. 열극석을 쓰면 실패해도 아무 일도 없다.</p></div>';
+      h += '<div class="prose"><p>강화 단계마다 장비 능력 +8%. +4부터는 실패하면 단계가 떨어지고, +7부터는 실패할 때 30% 확률로 부서진다. 열극석을 쓰면 실패해도 아무 일도 없다.</p></div>';
       h += row('열극석 보호 ' + (tabs.protect ? '<b class="pos">켜짐</b>' : '꺼짐'), '보유 열극석 ' + (s.stash.riftStone || 0), null, btn(tabs.protect ? '끄기' : '켜기', 'protect', ''));
       const list = [];
       for (const k in s.equip) if (s.equip[k] && typeof s.equip[k] === 'object') list.push([s.equip[k], k]);
@@ -444,7 +443,7 @@ HC.Panels = (function () {
 
   BUILD.tattoo = () => {
     const s = S();
-    let h = '<div class="prose"><p>살갗에 피로 새기는 문양. 기본 혈문 넷 외에는 이형이 떨어뜨리는 <b>혈문 도안</b>이 있어야 새길 수 있다.</p></div>';
+    let h = '<div class="prose"><p>살갗에 피로 새기는 문양. 기본 혈문 넷 말고는 이형이 떨어뜨리는 혈문 도안이 있어야 새길 수 있다.</p></div>';
     for (const t of HC.TATTOOS) {
       const lv = s.sub.tattoos[t.id] || 0;
       const un = HC.Sub.tattooUnlocked(t);
@@ -458,7 +457,7 @@ HC.Panels = (function () {
 
   BUILD.statue = () => {
     const s = S();
-    let h = '<div class="prose"><p>나락에서 죽은 이들의 위령비. 몬스터가 드물게 떨어뜨리는 <b>위령 파편</b>을 바치면 위령비가 당신을 굽어본다.</p></div>';
+    let h = '<div class="prose"><p>나락에서 죽은 이들의 위령비. 몬스터가 드물게 떨어뜨리는 위령 파편을 바치면 위령비가 당신을 굽어본다.</p></div>';
     for (const st of HC.STATUES) {
       const lv = s.sub.statues[st.id] || 0;
       const need = HC.Sub.statueNeed(lv);
@@ -517,7 +516,7 @@ HC.Panels = (function () {
       if (!s.souls.length) h += '<p class="empty">아직 아무 영혼도 담지 않았다.</p>';
       s.souls.forEach((so, i) => { h += soulCard(so, i, true); });
     } else if (t === 'orb') {
-      h += '<div class="prose"><p>흡수하지 않은 영혼 구슬. 흡수하거나, 제단에 바쳐 <b>신앙</b>으로 바꿀 수 있다. 신앙으로 서약을 맺는다.</p></div>';
+      h += '<div class="prose"><p>흡수하지 않은 영혼 구슬. 흡수해도 되고, 제단에 바쳐 신앙으로 바꿔도 된다. 서약은 신앙으로 맺는다.</p></div>';
       if (!s.soulOrbs.length) h += '<p class="empty">보관 중인 구슬이 없다.</p>';
       s.soulOrbs.forEach((o, i) => { h += orbRow(o, i, 'save', true); });
     } else if (t === 'skill') {
@@ -626,7 +625,7 @@ HC.Panels = (function () {
         '<dt>영혼 슬롯</dt><dd>' + s.souls.length + ' / ' + s.level + '</dd>' +
         '<dt>최고 도달</dt><dd>' + s.maxFloor + '층</dd>' +
         '<dt>강하 / 사망 / 탈출</dt><dd>' + s.stats.descents + ' / ' + s.stats.deaths + ' / ' + (s.stats.escapes || 0) + '</dd></dl>' +
-        '<div class="prose"><p>등급은 영혼에 새긴 영혼의 총량으로 정해진다. 높은 등급의 영혼일수록 훨씬 무겁다. 등급이 오르면 교환소 시세가 좋아지고, 잡화점이 더 좋은 물건을 내준다.</p></div>';
+        '<div class="prose"><p>등급은 몸에 담은 영혼이 얼마나 무거운지로 정해진다. 강한 놈의 영혼일수록 훨씬 무겁다. 등급이 오르면 교환소 시세가 좋아지고 잡화점도 더 좋은 물건을 꺼내 온다.</p></div>';
     } else if (t === 'cards') {
       h += '<div class="prose"><p>잡은 수만큼 그 몬스터를 안다. 별이 오를 때마다 영구 보너스가 붙는다.</p></div>';
       for (let f = 1; f <= HC.MAX_FLOOR; f++) {

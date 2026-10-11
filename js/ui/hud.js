@@ -125,7 +125,7 @@ HC.UI = (function () {
     for (let i = 0; i < 4; i++) {
       const id = s.skillSlots[i];
       const sk = id && HC.SKILLS[id];
-      h += '<div class="slot' + (sk ? '' : ' empty') + '" style="--c:' + (sk ? sk.col : '#333') + '" title="' + (sk ? U.esc(sk.n + ' — ' + sk.d) : '빈 슬롯') + '">' +
+      h += '<div class="slot' + (sk ? '' : ' empty') + '" style="--c:' + (sk ? sk.col : '#333') + '" title="' + (sk ? U.esc(sk.n + ': ' + sk.d) : '빈 슬롯') + '">' +
         '<span class="key">' + keys[i] + '</span><span class="nm">' + (sk ? U.esc(sk.n) : '—') + '</span><div class="cd"></div></div>';
     }
     el.skills.innerHTML = h;

@@ -136,7 +136,7 @@ HC.City = (function () {
     G.cam = G.cam || HC.Render.Camera();
     HC.Render.updateCamera(G.cam, G.zone, G.player, 0.016, true);
     HC.Audio.ambience('city');
-    HC.UI.zoneName('카르덴 — 회색 비가 내리는 도시');
+    HC.UI.zoneName('카르덴');
     HC.UI.bossBar(null);
     HC.UI.dirty = true;
   }

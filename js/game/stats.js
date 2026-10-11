@@ -37,7 +37,7 @@ HC.Stats = (function () {
         if (k in s) s[k] += v; else m[k] = (m[k] || 0) + v;
       }
     }
-    // 레벨: 혼력이 오른다 (원작: 레벨업 시 영혼력 상승)
+    // 레벨이 오르면 혼력도 오른다
     const L = save.level;
     s.spr += L <= 5 ? (L - 1) * 5 : 20 + (L - 5) * 12;
     s.vit += (L - 1) * 1;

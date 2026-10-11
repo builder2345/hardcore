@@ -3,7 +3,7 @@
  몬스터 정의.
  grade: 9(최하)~1. kind: normal | elite(이형) | lord(층주) | calamity(층의 재앙) | guardian(열극의 파수꾼)
  attacks: 적 공격 라이브러리(entities/enemy.js)의 타입과 수치.
- soul: 영혼. colors마다 다른 액티브를 준다(원작의 '색깔에 따라 액티브가 다르다'를 차용). rainbow면 모든 액티브.
+ soul: 영혼. colors마다 다른 액티브를 준다. rainbow면 모든 액티브.
 */
 HC.MOBS = {};
 (function () {
@@ -570,7 +570,7 @@ HC.MOBS = {};
   });
 })();
 
-// 잠식종: 층주가 깨어나면 일반 몬스터가 나락에 잠식되어 강해진다 (원작: 계층군주 출현 시 심연 변종)
+// 잠식종: 층주가 깨어나면 일반 몬스터가 나락에 잠식되어 강해진다
 HC.corruptDef = function (base) {
   const d = Object.assign({}, base);
   d.id = base.id + '_c'; d.baseId = base.id;
