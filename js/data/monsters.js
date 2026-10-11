@@ -91,7 +91,7 @@ HC.MOBS = {};
   def('bloatGhoul', {
     n: '부패한 거인 송장', grade: 7, floor: 1, kind: 'elite', ai: 'walker', poise: 220,
     body: { t: 'humanoid', w: 26, h: 36, c: '#4a5a40', c2: '#283020', eye: '#c8ff60', wpn: 'none', hunch: 0.5, fat: true },
-    hp: 1500, atk: 52, def: 8, spd: 42, aggro: 220, exp: 140, stone: [22, 32],
+    hp: 1100, atk: 52, def: 8, spd: 42, aggro: 220, exp: 140, stone: [22, 32],
     attacks: [
       { t: 'swipe', mult: 1.1, range: 30, h: 34, windup: 0.6, cd: 1.6, status: { poison: [5, 0.2] } },
       { t: 'slam', mult: 1.5, radius: 70, windup: 0.9, cd: 5, status: { poison: [6, 0.25] }, col: '#80c040' },
@@ -104,7 +104,7 @@ HC.MOBS = {};
   def('varges', {
     n: '심연을 걷는 자 바르게스', grade: 5, floor: 1, kind: 'lord', ai: 'boss', poise: 9999, flying: true,
     body: { t: 'humanoid', w: 22, h: 46, c: '#2e2240', c2: '#160e1e', eye: '#c060ff', wpn: 'scythe', hunch: 0.1, robe: true, horns: true },
-    hp: 7000, atk: 72, def: 10, spd: 90, aggro: 999, exp: 650, stone: [120, 160],
+    hp: 4500, atk: 72, def: 10, spd: 90, aggro: 999, exp: 650, stone: [120, 160],
     phases: [
       { hp: 1, attacks: [
         { t: 'swipe', mult: 1.2, range: 44, h: 40, windup: 0.6, cd: 1.6 },
@@ -129,7 +129,7 @@ HC.MOBS = {};
   def('grumar', {
     n: '결정 포식룡 그루마르', grade: 3, floor: 1, kind: 'calamity', ai: 'boss', poise: 9999,
     body: { t: 'beast', w: 120, h: 70, c: '#20303c', c2: '#62c8ff', eye: '#d0f4ff' },
-    hp: 48000, atk: 135, def: 26, spd: 110, aggro: 999, exp: 4200, stone: [600, 900],
+    hp: 22000, atk: 135, def: 26, spd: 110, aggro: 999, exp: 4200, stone: [600, 900],
     phases: [
       { hp: 1, attacks: [
         { t: 'beam', mult: 1.4, len: 380, h: 22, windup: 0.9, dur: 0.6, cd: 4.5, col: '#9adfff' },
@@ -151,7 +151,7 @@ HC.MOBS = {};
   def('kalamus', {
     n: '핏빛 성주 칼라무스', grade: 6, floor: 1, kind: 'guardian', ai: 'boss', poise: 9999,
     body: { t: 'humanoid', w: 16, h: 34, c: '#2a0a12', c2: '#120408', eye: '#ff2030', wpn: 'none', cape: true, crown: true },
-    hp: 5200, atk: 62, def: 8, spd: 110, aggro: 999, exp: 700, stone: [80, 120],
+    hp: 2600, atk: 62, def: 8, spd: 110, aggro: 999, exp: 700, stone: [80, 120],
     phases: [
       { hp: 1, attacks: [
         { t: 'teleport', cd: 4, windup: 0.35 },
@@ -171,7 +171,7 @@ HC.MOBS = {};
   def('lizardman', {
     n: '잿빛 약탈자', grade: 8, floor: 2, kind: 'normal', ai: 'walker',
     body: { t: 'humanoid', w: 13, h: 24, c: '#5a6040', c2: '#30351f', eye: '#ffcc30', wpn: 'spear', hunch: 0.25, tail: true },
-    hp: 230, atk: 56, def: 9, spd: 85, aggro: 200, exp: 24, stone: [3, 6],
+    hp: 200, atk: 50, def: 9, spd: 85, aggro: 200, exp: 24, stone: [3, 6],
     attacks: [{ t: 'swipe', mult: 1, range: 34, h: 10, windup: 0.45, cd: 1.3 }, { t: 'lunge', mult: 1.25, speed: 360, dur: 0.3, windup: 0.55, cd: 2.8, range: 140 }],
     soul: { drop: 0.022, stats: { agi: 5, str: 4, res: -2 }, colors: [{ c: '황갈', hex: '#c0a060', a: 'pierce' }, { c: '녹색', hex: '#80a070', a: 'scaleGuard' }], passive: 'coldBlood' },
     drops: [{ id: 'lizardScale', ch: 0.35 }], card: { k: 'critDmg', v: 0.01 },
@@ -179,7 +179,7 @@ HC.MOBS = {};
   def('scorpion', {
     n: '독니 거미', grade: 8, floor: 2, kind: 'normal', ai: 'walker', poise: 30,
     body: { t: 'crawler', w: 26, h: 14, c: '#3e2c20', c2: '#1e140e', eye: '#ff6020', tail: true },
-    hp: 270, atk: 52, def: 18, spd: 72, aggro: 180, exp: 26, stone: [3, 6],
+    hp: 220, atk: 48, def: 18, spd: 72, aggro: 180, exp: 26, stone: [3, 6],
     attacks: [{ t: 'swipe', mult: 1, range: 22, windup: 0.4, cd: 1.3 }, { t: 'swipe', mult: 1.1, range: 44, h: 26, windup: 0.65, cd: 2.6, status: { poison: [5, 0.2] }, sting: true }, { t: 'charge', mult: 1.2, speed: 280, dur: 0.7, windup: 0.6, cd: 5 }],
     soul: { drop: 0.022, stats: { bon: 6, cut: 3, agi: -2 }, colors: [{ c: '독녹', hex: '#90d060', a: 'venomSting' }, { c: '적갈', hex: '#806040', a: 'shellCharge' }], passive: 'carapace' },
     drops: [{ id: 'scorpShell', ch: 0.35 }], card: { k: 'physDR', v: 0.005 },
@@ -187,7 +187,7 @@ HC.MOBS = {};
   def('ashWraith', {
     n: '잿빛 망령', grade: 7, floor: 2, kind: 'normal', ai: 'flyer',
     body: { t: 'flyer', w: 14, h: 22, c: '#6a6060', c2: '#3a3434', eye: '#ffa040', wings: 'cloak' },
-    hp: 190, atk: 58, def: 3, spd: 95, aggro: 230, exp: 30, stone: [3, 7],
+    hp: 170, atk: 52, def: 3, spd: 95, aggro: 230, exp: 30, stone: [3, 7],
     attacks: [{ t: 'bolt', mult: 1, count: 1, speed: 210, homing: 1.4, windup: 0.6, cd: 2.4, col: '#ffa040', mag: true }, { t: 'swoop', mult: 1.1, speed: 300, windup: 0.5, cd: 3.5, range: 160 }],
     soul: { drop: 0.022, stats: { spr: 6, res: 5, vit: -4 }, colors: [{ c: '청회', hex: '#a0c0ff', a: 'spiritBolt' }, { c: '흰', hex: '#d0d8e0', a: 'fade' }], passive: 'wraithTouch' },
     drops: [{ id: 'ashEssence', ch: 0.35 }], card: { k: 'skillDmg', v: 0.01 },
@@ -195,7 +195,7 @@ HC.MOBS = {};
   def('rockGolem', {
     n: '바위껍질 오우거', grade: 7, floor: 2, kind: 'normal', ai: 'walker', poise: 90,
     body: { t: 'golem', w: 22, h: 30, c: '#5a5048', c2: '#33302b', eye: '#ff9040' },
-    hp: 560, atk: 72, def: 22, spd: 40, aggro: 170, exp: 36, stone: [4, 8],
+    hp: 420, atk: 66, def: 22, spd: 40, aggro: 170, exp: 36, stone: [4, 8],
     attacks: [{ t: 'swipe', mult: 1, range: 26, h: 28, windup: 0.7, cd: 1.8 }, { t: 'slam', mult: 1.3, radius: 54, windup: 0.95, cd: 4.5, col: '#c08050' }, { t: 'throw', mult: 1.2, speed: 280, gravity: 420, windup: 0.9, cd: 4, range: 280, sprite: 'rock' }],
     soul: { drop: 0.022, stats: { bon: 8, vit: 8, agi: -4, flx: -3 }, colors: [{ c: '회갈', hex: '#8a7a6a', a: 'boulder' }, { c: '황색', hex: '#c0a080', a: 'giantForm' }], passive: 'stoneSkin' },
     drops: [{ id: 'golemCore', ch: 0.3 }], card: { k: 'hpPct', v: 0.01 },
@@ -203,7 +203,7 @@ HC.MOBS = {};
   def('selkis', {
     n: '독니 여왕 셀키스', grade: 6, floor: 2, kind: 'elite', ai: 'walker', poise: 260,
     body: { t: 'crawler', w: 40, h: 22, c: '#4a3a16', c2: '#2a200a', eye: '#b0ff60', tail: true, crown: true },
-    hp: 3400, atk: 92, def: 26, spd: 95, aggro: 280, exp: 420, stone: [40, 60],
+    hp: 2400, atk: 88, def: 26, spd: 95, aggro: 280, exp: 420, stone: [40, 60],
     attacks: [
       { t: 'swipe', mult: 1.1, range: 52, h: 30, windup: 0.6, cd: 1.6, status: { poison: [6, 0.25] }, sting: true },
       { t: 'throw', mult: 0.9, count: 3, spread: 0.25, speed: 420, gravity: 0, windup: 0.6, cd: 3.2, range: 400, sprite: 'needle', col: '#b0ff60', status: { poison: [5, 0.2] } },
@@ -216,7 +216,7 @@ HC.MOBS = {};
   def('ashSoul', {
     n: '잿바람의 혼', grade: 6, floor: 2, kind: 'elite', ai: 'flyer', poise: 200,
     body: { t: 'flyer', w: 24, h: 34, c: '#8a7a70', c2: '#4a403a', eye: '#ff7030', wings: 'cloak', crown: true },
-    hp: 2800, atk: 96, def: 10, spd: 120, aggro: 300, exp: 420, stone: [40, 60],
+    hp: 2000, atk: 88, def: 10, spd: 120, aggro: 300, exp: 420, stone: [40, 60],
     attacks: [
       { t: 'bolt', mult: 0.8, count: 5, spread: 0.6, speed: 230, homing: 1.6, windup: 0.7, cd: 3.2, col: '#ff8040', mag: true },
       { t: 'swoop', mult: 1.3, speed: 380, windup: 0.5, cd: 3, range: 220 },
@@ -228,7 +228,7 @@ HC.MOBS = {};
   def('golemCoreElite', {
     n: '용암 심장 오우거', grade: 6, floor: 2, kind: 'elite', ai: 'walker', poise: 400,
     body: { t: 'golem', w: 34, h: 44, c: '#4a4038', c2: '#2a241f', eye: '#ffb060', core: true },
-    hp: 4800, atk: 104, def: 36, spd: 38, aggro: 260, exp: 460, stone: [45, 65],
+    hp: 3400, atk: 95, def: 36, spd: 38, aggro: 260, exp: 460, stone: [45, 65],
     attacks: [
       { t: 'slam', mult: 1.4, radius: 80, windup: 1.0, cd: 4, col: '#ffb060' },
       { t: 'beam', mult: 1.5, len: 360, h: 14, windup: 1.1, dur: 0.5, cd: 6, col: '#ffb060' },
@@ -240,7 +240,7 @@ HC.MOBS = {};
   def('lizardChief', {
     n: '약탈자 두목', grade: 6, floor: 2, kind: 'elite', ai: 'walker', poise: 220,
     body: { t: 'humanoid', w: 18, h: 32, c: '#4a5a30', c2: '#283018', eye: '#ff5020', wpn: 'greatsword', hunch: 0.2, tail: true, horns: true },
-    hp: 3600, atk: 100, def: 20, spd: 105, aggro: 300, exp: 440, stone: [42, 62],
+    hp: 2600, atk: 92, def: 20, spd: 105, aggro: 300, exp: 440, stone: [42, 62],
     attacks: [
       { t: 'combo', mult: 0.9, hits: 3, range: 34, windup: 0.5, interval: 0.22, cd: 2.6 },
       { t: 'lunge', mult: 1.4, speed: 420, dur: 0.35, windup: 0.5, cd: 3, range: 180 },
@@ -252,7 +252,7 @@ HC.MOBS = {};
   def('agdax', {
     n: '재의 왕관 아그닥스', grade: 4, floor: 2, kind: 'lord', ai: 'boss', poise: 9999,
     body: { t: 'humanoid', w: 26, h: 50, c: '#2a1a14', c2: '#140c08', eye: '#ff6020', wpn: 'greatsword', hunch: 0.1, crown: true, embers: true },
-    hp: 26000, atk: 125, def: 24, spd: 95, aggro: 999, exp: 2600, stone: [300, 420],
+    hp: 16000, atk: 115, def: 24, spd: 95, aggro: 999, exp: 2600, stone: [300, 420],
     phases: [
       { hp: 1, attacks: [
         { t: 'combo', mult: 1, hits: 2, range: 46, h: 44, windup: 0.6, interval: 0.3, cd: 2.2 },
@@ -274,7 +274,7 @@ HC.MOBS = {};
   def('barkus', {
     n: '재를 달리는 악몽 바르쿠스', grade: 2, floor: 2, kind: 'calamity', ai: 'boss', poise: 9999,
     body: { t: 'beast', w: 120, h: 80, c: '#3a2a20', c2: '#ff7a30', eye: '#ffd080' },
-    hp: 150000, atk: 260, def: 45, spd: 150, aggro: 999, exp: 16000, stone: [1500, 2200],
+    hp: 60000, atk: 240, def: 45, spd: 150, aggro: 999, exp: 16000, stone: [1500, 2200],
     phases: [
       { hp: 1, attacks: [
         { t: 'charge', mult: 1.4, speed: 480, dur: 1.3, windup: 0.75, cd: 4 },
@@ -293,7 +293,7 @@ HC.MOBS = {};
   def('demus', {
     n: '패배를 모르는 투사 데무스', grade: 5, floor: 2, kind: 'guardian', ai: 'boss', poise: 9999,
     body: { t: 'humanoid', w: 18, h: 34, c: '#5a5040', c2: '#2e2820', eye: '#ffd060', wpn: 'shield', armor: true },
-    hp: 20000, atk: 108, def: 32, spd: 100, aggro: 999, exp: 2800, stone: [250, 350],
+    hp: 6000, atk: 100, def: 32, spd: 100, aggro: 999, exp: 2800, stone: [250, 350],
     phases: [
       { hp: 1, attacks: [
         { t: 'charge', mult: 1.3, speed: 400, dur: 0.6, windup: 0.6, cd: 4, stun: 0.6 },
@@ -312,7 +312,7 @@ HC.MOBS = {};
   def('hanged', {
     n: '목매단 망자', grade: 6, floor: 3, kind: 'normal', ai: 'hanger',
     body: { t: 'humanoid', w: 12, h: 24, c: '#5a5a50', c2: '#2a2a24', eye: '#e0e0a0', wpn: 'none', hunch: 0.1, hanged: true },
-    hp: 640, atk: 125, def: 12, spd: 60, aggro: 160, exp: 72, stone: [6, 10],
+    hp: 520, atk: 105, def: 12, spd: 60, aggro: 160, exp: 72, stone: [6, 10],
     attacks: [{ t: 'swipe', mult: 1, range: 20, windup: 0.5, cd: 1.5 }, { t: 'lunge', mult: 1.2, speed: 260, dur: 0.3, windup: 0.6, cd: 3, range: 90, status: { slow: [2, 0.3] } }],
     soul: { drop: 0.02, stats: { wil: 6, spr: 5, vit: 4, agi: -3 }, colors: [{ c: '갈색', hex: '#a09070', a: 'noose' }, { c: '붉은', hex: '#c05050', a: 'fleshArmor' }], passive: 'hangman' },
     drops: [{ id: 'noose', ch: 0.35 }], card: { k: 'statusRes', v: 0.01 },
@@ -320,7 +320,7 @@ HC.MOBS = {};
   def('mistWitch', {
     n: '안개 마녀', grade: 5, floor: 3, kind: 'normal', ai: 'ranged', keep: 150,
     body: { t: 'humanoid', w: 12, h: 26, c: '#2a3a30', c2: '#141e18', eye: '#a0ff80', wpn: 'staff', robe: true, hunch: 0.35 },
-    hp: 540, atk: 128, def: 6, spd: 70, aggro: 260, exp: 92, stone: [7, 12],
+    hp: 450, atk: 110, def: 6, spd: 70, aggro: 260, exp: 92, stone: [7, 12],
     attacks: [
       { t: 'bolt', mult: 1, count: 1, speed: 230, homing: 1.8, windup: 0.7, cd: 2.6, col: '#a060ff', mag: true, status: { slow: [3, 0.35] } },
       { t: 'teleport', cd: 7, windup: 0.4 },
@@ -332,7 +332,7 @@ HC.MOBS = {};
   def('treant', {
     n: '뒤틀린 수목인', grade: 5, floor: 3, kind: 'normal', ai: 'walker', poise: 160,
     body: { t: 'tree', w: 24, h: 40, c: '#3a3020', c2: '#1e1810', eye: '#c0ff60' },
-    hp: 1600, atk: 150, def: 32, spd: 32, aggro: 170, exp: 110, stone: [9, 15],
+    hp: 1200, atk: 135, def: 32, spd: 32, aggro: 170, exp: 110, stone: [9, 15],
     attacks: [{ t: 'swipe', mult: 1, range: 40, h: 36, windup: 0.75, cd: 1.9 }, { t: 'spikes', mult: 1.1, count: 6, step: 24, windup: 0.8, cd: 5, col: '#6a8050' }, { t: 'slam', mult: 1.2, radius: 60, windup: 1.0, cd: 6, col: '#6a8050' }],
     soul: { drop: 0.02, stats: { vit: 12, reg: 6, bon: 6, agi: -6 }, colors: [{ c: '녹색', hex: '#6a8050', a: 'rootSpike' }, { c: '갈색', hex: '#7a6a50', a: 'barkSkin' }], passive: 'rootbound' },
     drops: [{ id: 'heartwood', ch: 0.35 }], card: { k: 'hpPct', v: 0.012 },
@@ -340,7 +340,7 @@ HC.MOBS = {};
   def('crow', {
     n: '검은 까마귀', grade: 6, floor: 3, kind: 'normal', ai: 'flyer', pack: [2, 4],
     body: { t: 'flyer', w: 12, h: 10, c: '#18181e', c2: '#0a0a0e', eye: '#ff3030', wings: 'bird' },
-    hp: 280, atk: 96, def: 4, spd: 150, aggro: 240, exp: 50, stone: [4, 8],
+    hp: 240, atk: 85, def: 4, spd: 150, aggro: 240, exp: 50, stone: [4, 8],
     attacks: [{ t: 'swoop', mult: 1, speed: 360, windup: 0.4, cd: 2.2, range: 180 }],
     soul: { drop: 0.02, stats: { agi: 8, per: 6, bon: -4 }, colors: [{ c: '검은', hex: '#303040', a: 'crowStorm' }, { c: '붉은', hex: '#ff3030', a: 'murderEye' }], passive: 'crowEyes' },
     drops: [{ id: 'crowFeather', ch: 0.4 }], card: { k: 'crit', v: 0.005 },
@@ -348,7 +348,7 @@ HC.MOBS = {};
   def('voicelessWitch', {
     n: '목소리 없는 마녀', grade: 5, floor: 3, kind: 'elite', ai: 'ranged', keep: 180, poise: 300,
     body: { t: 'humanoid', w: 16, h: 34, c: '#1e2a24', c2: '#0c1410', eye: '#ffffff', wpn: 'staff', robe: true, hunch: 0.2, horns: true },
-    hp: 9000, atk: 175, def: 14, spd: 90, aggro: 320, exp: 1300, stone: [70, 100],
+    hp: 6000, atk: 160, def: 14, spd: 90, aggro: 320, exp: 1300, stone: [70, 100],
     attacks: [
       { t: 'bolt', mult: 0.8, count: 5, spread: 0.7, speed: 240, homing: 2, windup: 0.7, cd: 3, col: '#a060ff', mag: true },
       { t: 'teleport', cd: 4, windup: 0.3 },
@@ -361,7 +361,7 @@ HC.MOBS = {};
   def('thousandEyeCrow', {
     n: '천 개의 눈', grade: 5, floor: 3, kind: 'elite', ai: 'flyer', poise: 250,
     body: { t: 'flyer', w: 30, h: 24, c: '#14141c', c2: '#08080c', eye: '#ff2020', wings: 'bird', eyes: true },
-    hp: 7600, atk: 170, def: 10, spd: 170, aggro: 340, exp: 1250, stone: [65, 95],
+    hp: 5000, atk: 155, def: 10, spd: 170, aggro: 340, exp: 1250, stone: [65, 95],
     attacks: [
       { t: 'swoop', mult: 1.3, speed: 440, windup: 0.4, cd: 2, range: 260 },
       { t: 'summon', mob: 'crow', count: 3, cd: 12, max: 5, windup: 0.7 },
@@ -373,7 +373,7 @@ HC.MOBS = {};
   def('oldHeart', {
     n: '고목의 심장', grade: 5, floor: 3, kind: 'elite', ai: 'walker', poise: 500,
     body: { t: 'tree', w: 34, h: 54, c: '#4a3a24', c2: '#241c10', eye: '#ff9040', heart: true },
-    hp: 13000, atk: 185, def: 40, spd: 34, aggro: 260, exp: 1400, stone: [80, 110],
+    hp: 8500, atk: 165, def: 40, spd: 34, aggro: 260, exp: 1400, stone: [80, 110],
     attacks: [
       { t: 'spikes', mult: 1.1, count: 10, step: 26, windup: 0.8, cd: 4, col: '#80a060', status: { bleed: [4, 0.15] } },
       { t: 'slam', mult: 1.3, radius: 90, windup: 1.0, cd: 5, col: '#80a060' },
@@ -385,7 +385,7 @@ HC.MOBS = {};
   def('morwina', {
     n: '뒤틀린 숲의 어미 모르위나', grade: 3, floor: 3, kind: 'lord', ai: 'boss', poise: 9999,
     body: { t: 'humanoid', w: 26, h: 56, c: '#1a2620', c2: '#0a120e', eye: '#d0ffb0', wpn: 'staff', robe: true, horns: true, hunch: 0.2 },
-    hp: 75000, atk: 230, def: 32, spd: 100, aggro: 999, exp: 9500, stone: [700, 1000],
+    hp: 40000, atk: 200, def: 32, spd: 100, aggro: 999, exp: 9500, stone: [700, 1000],
     phases: [
       { hp: 1, attacks: [
         { t: 'bolt', mult: 0.8, count: 5, spread: 0.8, speed: 240, homing: 2, windup: 0.7, cd: 3, col: '#a0ff80', mag: true },
@@ -408,7 +408,7 @@ HC.MOBS = {};
   def('ygd', {
     n: '울부짖는 고목 이그드', grade: 1, floor: 3, kind: 'calamity', ai: 'boss', poise: 9999, rooted: true,
     body: { t: 'tree', w: 70, h: 110, c: '#2a2218', c2: '#0e0a06', eye: '#ff5030', heart: true, giant: true },
-    hp: 380000, atk: 480, def: 70, spd: 20, aggro: 999, exp: 60000, stone: [4000, 6000],
+    hp: 150000, atk: 440, def: 70, spd: 20, aggro: 999, exp: 60000, stone: [4000, 6000],
     phases: [
       { hp: 1, attacks: [
         { t: 'spikes', mult: 1.1, count: 16, step: 30, windup: 0.9, cd: 3.5, col: '#80a060' },
@@ -427,7 +427,7 @@ HC.MOBS = {};
   def('eilen', {
     n: '백색 사제 에일렌', grade: 4, floor: 3, kind: 'guardian', ai: 'boss', poise: 9999,
     body: { t: 'humanoid', w: 14, h: 34, c: '#d8d4c4', c2: '#8a8676', eye: '#ffffff', wpn: 'staff', robe: true, halo: true },
-    hp: 62000, atk: 215, def: 26, spd: 95, aggro: 999, exp: 10500, stone: [600, 900],
+    hp: 16000, atk: 190, def: 26, spd: 95, aggro: 999, exp: 10500, stone: [600, 900],
     phases: [
       { hp: 1, attacks: [
         { t: 'beam', mult: 1.4, len: 460, h: 18, windup: 0.9, dur: 0.5, cd: 4.5, col: '#fff0c0', mag: true },
@@ -447,7 +447,7 @@ HC.MOBS = {};
   def('statueGuard', {
     n: '석상 파수병', grade: 4, floor: 4, kind: 'normal', ai: 'walker', poise: 200,
     body: { t: 'humanoid', w: 16, h: 30, c: '#76767e', c2: '#3a3a40', eye: '#c0b0ff', wpn: 'spear', armor: true, stone: true },
-    hp: 2700, atk: 260, def: 62, spd: 50, aggro: 200, exp: 240, stone: [14, 22],
+    hp: 1300, atk: 200, def: 45, spd: 50, aggro: 200, exp: 240, stone: [14, 22],
     attacks: [{ t: 'swipe', mult: 1, range: 46, h: 12, windup: 0.6, cd: 1.6 }, { t: 'combo', mult: 0.8, hits: 2, range: 46, windup: 0.6, interval: 0.25, cd: 3.2 }],
     soul: { drop: 0.018, stats: { bon: 14, vit: 10, agi: -6 }, colors: [{ c: '회색', hex: '#b0b0c0', a: 'stoneSpear' }, { c: '흰', hex: '#e0e0e8', a: 'petrify' }], passive: 'statue' },
     drops: [{ id: 'statueChip', ch: 0.35 }], card: { k: 'physDR', v: 0.006 },
@@ -455,7 +455,7 @@ HC.MOBS = {};
   def('harpy', {
     n: '달 없는 늑대인간', grade: 4, floor: 4, kind: 'normal', ai: 'flyer',
     body: { t: 'flyer', w: 18, h: 20, c: '#6a5a7a', c2: '#3a3046', eye: '#ffe060', wings: 'bird', face: true },
-    hp: 1800, atk: 245, def: 22, spd: 135, aggro: 260, exp: 220, stone: [12, 20],
+    hp: 1000, atk: 185, def: 22, spd: 135, aggro: 260, exp: 220, stone: [12, 20],
     attacks: [{ t: 'swoop', mult: 1.1, speed: 400, windup: 0.45, cd: 2.4, range: 220 }, { t: 'throw', mult: 0.7, count: 3, spread: 0.3, speed: 380, gravity: 0, windup: 0.6, cd: 3, range: 320, sprite: 'needle', col: '#d0c8ff' }],
     soul: { drop: 0.018, stats: { agi: 12, flx: 8, vit: -5 }, colors: [{ c: '보라', hex: '#c0b0e0', a: 'diveTalon' }, { c: '흰', hex: '#e0e0ff', a: 'galeFeather' }], passive: 'harpy' },
     drops: [{ id: 'harpyPlume', ch: 0.35 }], card: { k: 'movePct', v: 0.01 },
@@ -463,7 +463,7 @@ HC.MOBS = {};
   def('phantomKnight', {
     n: '유령 기사', grade: 3, floor: 4, kind: 'normal', ai: 'walker', poise: 160,
     body: { t: 'humanoid', w: 16, h: 32, c: '#4a5a7a', c2: '#26304a', eye: '#80c0ff', wpn: 'greatsword', armor: true, ghost: true },
-    hp: 3800, atk: 300, def: 42, spd: 92, aggro: 240, exp: 340, stone: [18, 28],
+    hp: 1600, atk: 220, def: 35, spd: 92, aggro: 240, exp: 340, stone: [18, 28],
     attacks: [{ t: 'combo', mult: 0.8, hits: 3, range: 40, windup: 0.5, interval: 0.22, cd: 2.5 }, { t: 'lunge', mult: 1.3, speed: 440, dur: 0.32, windup: 0.5, cd: 3.2, range: 180 }],
     soul: { drop: 0.018, stats: { str: 14, bon: 8, wil: 8, agi: 4 }, colors: [{ c: '청색', hex: '#9ab0ff', a: 'phantomSlash' }, { c: '회색', hex: '#c0c0c0', a: 'shieldBash' }], passive: 'knightOath' },
     drops: [{ id: 'phantomSteel', ch: 0.3 }], card: { k: 'dmgPct', v: 0.012 },
@@ -471,7 +471,7 @@ HC.MOBS = {};
   def('shadowAssassin', {
     n: '그림자 자객', grade: 3, floor: 4, kind: 'normal', ai: 'walker',
     body: { t: 'humanoid', w: 11, h: 26, c: '#16121f', c2: '#08060e', eye: '#ff3070', wpn: 'daggers', hunch: 0.25 },
-    hp: 2500, atk: 320, def: 18, spd: 155, aggro: 260, exp: 330, stone: [18, 28],
+    hp: 1100, atk: 230, def: 18, spd: 155, aggro: 260, exp: 330, stone: [18, 28],
     attacks: [{ t: 'teleport', cd: 4.5, windup: 0.3, behind: true }, { t: 'combo', mult: 0.6, hits: 3, range: 22, windup: 0.32, interval: 0.1, cd: 1.8, status: { bleed: [3, 0.1] } }, { t: 'lunge', mult: 1.2, speed: 480, dur: 0.25, windup: 0.4, cd: 2.6, range: 150 }],
     soul: { drop: 0.018, stats: { agi: 14, flx: 10, cut: 8, vit: -6 }, colors: [{ c: '검은', hex: '#6050a0', a: 'shadowStep' }, { c: '붉은', hex: '#ff3030', a: 'murderEye' }], passive: 'assassin' },
     drops: [{ id: 'shadowSilk', ch: 0.3 }], card: { k: 'critDmg', v: 0.015 },
@@ -479,7 +479,7 @@ HC.MOBS = {};
   def('fallenSentinel', {
     n: '타락한 감시자', grade: 3, floor: 4, kind: 'elite', ai: 'walker', poise: 900,
     body: { t: 'humanoid', w: 24, h: 46, c: '#5a5464', c2: '#2a2632', eye: '#ff60a0', wpn: 'spear', armor: true, stone: true, horns: true },
-    hp: 42000, atk: 380, def: 80, spd: 60, aggro: 300, exp: 4200, stone: [200, 280],
+    hp: 16000, atk: 300, def: 55, spd: 60, aggro: 300, exp: 4200, stone: [200, 280],
     attacks: [
       { t: 'combo', mult: 0.9, hits: 3, range: 60, h: 14, windup: 0.6, interval: 0.25, cd: 2.6 },
       { t: 'slam', mult: 1.3, radius: 90, windup: 1, cd: 5, col: '#c0b0ff' },
@@ -491,7 +491,7 @@ HC.MOBS = {};
   def('nightBlade', {
     n: '밤의 칼날', grade: 3, floor: 4, kind: 'elite', ai: 'walker', poise: 500,
     body: { t: 'humanoid', w: 13, h: 30, c: '#0e0a16', c2: '#04020a', eye: '#ff1050', wpn: 'daggers', hunch: 0.2, cape: true },
-    hp: 30000, atk: 420, def: 30, spd: 190, aggro: 340, exp: 4300, stone: [200, 280],
+    hp: 12000, atk: 330, def: 30, spd: 190, aggro: 340, exp: 4300, stone: [200, 280],
     attacks: [
       { t: 'teleport', cd: 2.6, windup: 0.25, behind: true },
       { t: 'combo', mult: 0.6, hits: 5, range: 26, windup: 0.3, interval: 0.09, cd: 2, status: { bleed: [4, 0.15] } },
@@ -503,7 +503,7 @@ HC.MOBS = {};
   def('orden', {
     n: '첨탑의 왕 오르덴', grade: 2, floor: 4, kind: 'lord', ai: 'boss', poise: 9999,
     body: { t: 'humanoid', w: 26, h: 52, c: '#3a3450', c2: '#1a1626', eye: '#e0d0ff', wpn: 'greatsword', armor: true, crown: true, cape: true },
-    hp: 240000, atk: 430, def: 75, spd: 100, aggro: 999, exp: 42000, stone: [2500, 3500],
+    hp: 90000, atk: 360, def: 60, spd: 100, aggro: 999, exp: 42000, stone: [2500, 3500],
     phases: [
       { hp: 1, attacks: [
         { t: 'combo', mult: 0.9, hits: 3, range: 54, h: 50, windup: 0.6, interval: 0.26, cd: 2.4 },
@@ -525,7 +525,7 @@ HC.MOBS = {};
   def('seraphiel', {
     n: '추락한 별 세라피엘', grade: 1, floor: 4, kind: 'calamity', ai: 'boss', poise: 9999, flying: true,
     body: { t: 'flyer', w: 40, h: 58, c: '#d8d0e8', c2: '#6a6080', eye: '#ffffff', wings: 'angel', halo: true, broken: true },
-    hp: 900000, atk: 820, def: 110, spd: 140, aggro: 999, exp: 260000, stone: [12000, 18000],
+    hp: 350000, atk: 760, def: 110, spd: 140, aggro: 999, exp: 260000, stone: [12000, 18000],
     phases: [
       { hp: 1, attacks: [
         { t: 'beam', mult: 1.3, len: 640, h: 22, windup: 0.9, dur: 0.6, cd: 4, col: '#fff8e0' },
@@ -546,7 +546,7 @@ HC.MOBS = {};
   def('doppel', {
     n: '거울 속의 자', grade: 2, floor: 4, kind: 'guardian', ai: 'boss', poise: 9999,
     body: { t: 'humanoid', w: 12, h: 26, c: '#b8c8d8', c2: '#5a6a7a', eye: '#ffffff', wpn: 'blade', mirror: true },
-    hp: 200000, atk: 380, def: 55, spd: 160, aggro: 999, exp: 46000, stone: [2200, 3000],
+    hp: 40000, atk: 320, def: 55, spd: 160, aggro: 999, exp: 46000, stone: [2200, 3000],
     phases: [
       { hp: 1, attacks: [
         { t: 'combo', mult: 0.7, hits: 3, range: 28, windup: 0.3, interval: 0.12, cd: 1.4 },
@@ -564,7 +564,7 @@ HC.MOBS = {};
   def('doppelShade', {
     n: '거울 그림자', grade: 3, floor: 4, kind: 'normal', ai: 'walker', summonOnly: true,
     body: { t: 'humanoid', w: 12, h: 26, c: '#6a7a8a', c2: '#3a4a5a', eye: '#ffffff', wpn: 'blade', mirror: true },
-    hp: 3000, atk: 260, def: 30, spd: 150, aggro: 999, exp: 100, stone: [5, 10],
+    hp: 1500, atk: 220, def: 30, spd: 150, aggro: 999, exp: 100, stone: [5, 10],
     attacks: [{ t: 'combo', mult: 0.6, hits: 2, range: 24, windup: 0.35, interval: 0.12, cd: 1.6 }],
     soul: null, drops: [],
   });

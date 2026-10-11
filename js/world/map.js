@@ -80,6 +80,8 @@ HC.Map = (function () {
         let ok = true;
         if (o.flatCenter && Math.abs(px - W / 2) < o.flatCenter + 6) ok = false;
         for (let i = px - 2; i < px + pw + 2; i++) if (pitCols.has(i)) ok = false;
+        // 양옆 지면 높이가 비슷한 곳에만 판다 (한쪽이 절벽이면 빠져나올 수 없다)
+        for (let i = px - 3; i < px + pw + 3; i++) if (Math.abs(ground[i] - ground[px - 1]) > 1) ok = false;
         if (!ok) continue;
         const lvl = Math.max(ground[px - 1], ground[px + pw]) + 3;
         for (let i = px; i < px + pw; i++) { ground[i] = Math.min(H - 2, lvl); pitCols.add(i); }
