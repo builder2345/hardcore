@@ -20,7 +20,13 @@ HC.Enemy = (function () {
   function create(def, x, y, o) {
     o = o || {};
     const b = def.body;
-    const [w, h] = hitboxSize(b);
+    let [w, h] = hitboxSize(b);
+    const art = HC.MOB_ART && HC.MOB_ART[def.baseId || def.id];
+    if (art && HC.SPRITE_META[art.k]) {
+      const spec = art.anims.idle || art.anims.walk;
+      const m = HC.SPRITE_META[art.k][typeof spec === 'string' ? spec : spec[0]];
+      if (m) { const sc = art.scale || 1; w = Math.max(10, Math.round(m.bw * sc * 0.55)); h = Math.max(10, Math.round(m.bh * sc * 0.88)); }
+    }
     const scale = o.scale || 1;
     const atks = def.attacks || [];
     const e = {
@@ -571,10 +577,8 @@ HC.Enemy = (function () {
     }
     if (e.spawnT > 0) ctx.globalAlpha = Math.min(ctx.globalAlpha, 1 - e.spawnT / 0.5);
     const tele = e.cur && e.cur.phase === 'windup';
-    const fl = e.flash > 0 || (tele && Math.floor(t * 16) % 2 === 0);
-    if (fl && 'filter' in ctx) ctx.filter = e.flash > 0 ? 'brightness(3)' : 'brightness(1.8) sepia(1) saturate(6) hue-rotate(-30deg)';
-    HC.Draw.body(ctx, e, cam, t);
-    if ('filter' in ctx) ctx.filter = 'none';
+    const fx = { flash: e.flash > 0 ? 0.8 : 0, red: tele && Math.floor(t * 12) % 2 === 0 ? 0.32 : 0 };
+    HC.Draw.body(ctx, e, cam, t, fx);
     ctx.globalAlpha = 1;
     // 잠식종 / 보스 오라
     if ((e.def.corrupt || e.boss) && !e.dead && Math.random() < (e.boss ? 0.6 : 0.25)) HC.FX.soulWisp(e.x + Math.random() * e.w, e.y + e.h * Math.random(), e.def.corrupt ? '#9040e0' : e.def.body.eye);

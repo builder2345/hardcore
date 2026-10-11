@@ -8,8 +8,74 @@ HC.Render = (function () {
   function mk(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
 
   // ── 지형 ──────────────────────────────────────────
+  // 타일셋 그림으로 지형을 그린다. 실패하면 false
+  function buildTilesArt(z, th, c) {
+    const key = HC.THEME_TILES && HC.THEME_TILES[th.bg];
+    const ts = key && HC.TILESETS[key];
+    const img = ts && HC.Assets.get(ts.img);
+    if (!img) return false;
+    const g = c.getContext('2d');
+    g.imageSmoothingEnabled = false;
+    const solidAt = (x, y) => { const t = M.get(z, x, y); return t === T.SOLID || t === T.SPIKE; };
+    const pick = (list, x, y) => list[(U.hash(x + ':' + y + ':' + (z.seed || 1)) >>> 3) % list.length];
+    const cell = (cc, px, py, sh) => g.drawImage(img, cc[0] * TS, cc[1] * TS, TS, sh || TS, px, py, TS, sh || TS);
+    for (let ty = 0; ty < z.h; ty++) {
+      for (let tx = 0; tx < z.w; tx++) {
+        const t = z.tiles[ty * z.w + tx];
+        const px = tx * TS, py = ty * TS;
+        if (t === T.SOLID || t === T.SPIKE) {
+          const up = !solidAt(tx, ty - 1), lf = !solidAt(tx - 1, ty), rt = !solidAt(tx + 1, ty), dn = !solidAt(tx, ty + 1) && ty + 1 < z.h;
+          const under = !up && !solidAt(tx, ty - 2) && ts.under;
+          let cc;
+          if (up) cc = lf && ts.tl ? pick(ts.tl, tx, ty) : rt && ts.tr ? pick(ts.tr, tx, ty) : pick(ts.top, tx, ty);
+          else if (dn && ts.bottom) cc = pick(ts.bottom, tx, ty);
+          else if (under) cc = pick(ts.under, tx, ty);
+          else if (lf && ts.left) cc = pick(ts.left, tx, ty);
+          else if (rt && ts.right) cc = pick(ts.right, tx, ty);
+          else {
+            let deep = solidAt(tx, ty - 3) && solidAt(tx - 1, ty) && solidAt(tx + 1, ty);
+            cc = deep && ts.deep ? pick(ts.deep, tx, ty) : pick(ts.fill, tx, ty);
+          }
+          cell(cc, px, py);
+          if (dn && !ts.bottom) { g.fillStyle = 'rgba(0,0,0,0.45)'; g.fillRect(px, py + TS - 3, TS, 3); }
+          if (up && ts.deco && (U.hash(tx + '/' + ty) % 3 === 0)) cell(pick(ts.deco, tx, ty), px, py - TS);
+          if (t === T.SPIKE) {
+            if (ts.spikeUp) cell(pick(ts.spikeUp, tx, ty), px, py - TS);
+            else {
+              g.fillStyle = '#c8c0b0';
+              for (let i = 0; i < 4; i++) { g.beginPath(); g.moveTo(px + i * 4, py); g.lineTo(px + i * 4 + 2, py - 7); g.lineTo(px + i * 4 + 4, py); g.fill(); }
+              g.fillStyle = '#6a2020'; g.fillRect(px, py - 1, TS, 1);
+            }
+          }
+        } else if (t === T.PLAT) {
+          const cc = pick(ts.top, tx, ty);
+          g.fillStyle = 'rgba(0,0,0,0.5)'; g.fillRect(px, py + 7, TS, 3);
+          cell(cc, px, py, 8);
+          const left = M.get(z, tx - 1, ty) !== T.PLAT, right = M.get(z, tx + 1, ty) !== T.PLAT;
+          g.fillStyle = 'rgba(0,0,0,0.55)';
+          if (left) g.fillRect(px, py, 1, 8);
+          if (right) g.fillRect(px + TS - 1, py, 1, 8);
+        }
+      }
+    }
+    drawRopes(g, z, th);
+    return true;
+  }
+
+  function drawRopes(g, z, th) {
+    for (const r of z.ropes) {
+      const x = r.x * TS + TS / 2;
+      g.fillStyle = U.shade(th.rope, -0.4); g.fillRect(x - 1, r.y0 * TS - 2, 3, (r.y1 - r.y0 + 1) * TS + 2);
+      g.fillStyle = th.rope; g.fillRect(x - 1, r.y0 * TS - 2, 2, (r.y1 - r.y0 + 1) * TS + 2);
+      g.fillStyle = U.shade(th.rope, 0.25);
+      for (let y = r.y0 * TS; y < (r.y1 + 1) * TS; y += 7) g.fillRect(x - 1, y, 2, 1);
+      g.fillStyle = '#3a3530'; g.fillRect(x - 3, r.y0 * TS - 3, 7, 3);
+    }
+  }
+
   function buildTiles(z, th) {
     const c = mk(z.w * TS, z.h * TS);
+    if (buildTilesArt(z, th, c)) return c;
     const g = c.getContext('2d');
     const rng = U.RNG((z.seed || 7) ^ 0x51ed);
     const solidAt = (x, y) => { const t = M.get(z, x, y); return t === T.SOLID || t === T.SPIKE; };
@@ -75,6 +141,11 @@ HC.Render = (function () {
 
   // ── 배경 ──────────────────────────────────────────
   function buildBackground(th, seed) {
+    const B = HC.BG && HC.BG[th.bg];
+    if (B && B.layers.every((L) => HC.Assets.get(L.img))) {
+      const layers = B.layers.map((L) => ({ img: HC.Assets.get(L.img), f: L.f, y: L.y, top: topColor(HC.Assets.get(L.img)) }));
+      return { art: true, sky: B.sky, layers };
+    }
     const rng = U.RNG(seed || 1);
     const W = 1280, H = 360;
     const sky = mk(HC.VW, HC.VH);
@@ -229,7 +300,41 @@ HC.Render = (function () {
     return { sky, layers };
   }
 
+  // 레이어 맨 윗줄 색 (불투명할 때만). file:// 에서 막히면 null
+  const topCache = new Map();
+  function topColor(im) {
+    if (topCache.has(im)) return topCache.get(im);
+    let col = null;
+    try {
+      const c = mk(im.width, 1), g = c.getContext('2d');
+      g.drawImage(im, 0, 0);
+      const d = g.getImageData(0, 0, im.width, 1).data;
+      let r = 0, gg = 0, b = 0, n = 0, op = 0;
+      for (let i = 0; i < d.length; i += 4) { if (d[i + 3] > 200) { r += d[i]; gg += d[i + 1]; b += d[i + 2]; n++; } op++; }
+      if (n > op * 0.9) col = 'rgb(' + Math.round(r / n) + ',' + Math.round(gg / n) + ',' + Math.round(b / n) + ')';
+    } catch (e) { col = null; }
+    topCache.set(im, col);
+    return col;
+  }
+
   function drawBackground(ctx, bg, cam, zoneH) {
+    if (bg.art) {
+      ctx.fillStyle = bg.sky; ctx.fillRect(0, 0, HC.VW, HC.VH);
+      const vy = zoneH ? U.clamp(cam.y / Math.max(1, zoneH * TS - HC.VH), 0, 1) : 1;
+      for (const L of bg.layers) {
+        const im = L.img, w = im.width, h = im.height;
+        let ox = -((cam.x * L.f) % w); if (ox > 0) ox -= w;
+        if (L.y === 'tile') {
+          let oy = -((cam.y * L.f) % h); if (oy > 0) oy -= h;
+          for (let y = oy; y < HC.VH; y += h) for (let x = ox; x < HC.VW; x += w) ctx.drawImage(im, Math.floor(x), Math.floor(y));
+        } else {
+          const y = HC.VH - h + Math.round((1 - vy) * 30 * (1 + L.f * 2));
+          if (L.top && y > 0) { ctx.fillStyle = L.top; ctx.fillRect(0, 0, HC.VW, y + 1); }
+          for (let x = ox; x < HC.VW; x += w) ctx.drawImage(im, Math.floor(x), y);
+        }
+      }
+      return;
+    }
     ctx.drawImage(bg.sky, 0, 0);
     const vy = zoneH ? U.clamp(cam.y / Math.max(1, zoneH * TS - HC.VH), 0, 1) : 0.5;
     for (const L of bg.layers) {

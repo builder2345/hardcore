@@ -5,6 +5,7 @@ HC.FX = (function () {
   const parts = [];
   const texts = [];
   const rings = [];
+  const anims = [];
   const MAX = 900;
 
   function p(o) {
@@ -32,6 +33,14 @@ HC.FX = (function () {
   function soulWisp(x, y, col) { p({ x: x + U.rand(-4, 4), y, vx: U.rand(-8, 8), vy: U.rand(-40, -15), life: U.rand(0.5, 1.0), s: U.randi(1, 2), col, g: -20, glow: true }); }
   function ring(x, y, r, col, life, w) { rings.push({ x, y, r0: 2, r, col, life: life || 0.35, max: life || 0.35, w: w || 2 }); }
 
+  // 스프라이트 효과 (사망 연기, 타격 섬광 등). 발 위치 기준
+  function anim(key, x, y, o) {
+    o = o || {};
+    if (!HC.Assets.ready || !HC.Spr.meta(key, 'play')) return;
+    anims.push({ key, x, y, t: 0, scale: o.scale || 1, facing: o.facing || 1, tint: o.tint, alpha: o.alpha });
+    if (anims.length > 60) anims.shift();
+  }
+
   function text(x, y, txt, col, size, o) {
     o = o || {};
     texts.push({ x: x + U.rand(-4, 4), y, txt: String(txt), col: col || '#fff', size: size || 12, life: o.life || 0.9, max: o.life || 0.9, vy: o.vy || -38, bold: o.bold });
@@ -54,9 +63,20 @@ HC.FX = (function () {
       t.y += t.vy * dt; t.vy *= 1 - Math.min(1, dt * 2.5);
     }
     for (let i = rings.length - 1; i >= 0; i--) { rings[i].life -= dt; if (rings[i].life <= 0) rings.splice(i, 1); }
+    for (let i = anims.length - 1; i >= 0; i--) {
+      const a = anims[i];
+      a.t += dt;
+      const m = HC.Spr.meta(a.key, 'play');
+      if (!m || a.t * m.fps >= m.n) anims.splice(i, 1);
+    }
   }
 
   function draw(ctx, cam) {
+    for (const a of anims) {
+      const m = HC.Spr.meta(a.key, 'play');
+      if (!m) continue;
+      HC.Spr.draw(ctx, a.key, 'play', Math.floor(a.t * m.fps), a.x - cam.x, a.y - cam.y, a.facing, { scale: a.scale, tint: a.tint, alpha: a.alpha });
+    }
     for (const q of parts) {
       const a = Math.max(0, q.life / q.max);
       ctx.globalAlpha = a;
@@ -95,7 +115,7 @@ HC.FX = (function () {
     octx.globalAlpha = 1;
   }
 
-  function clear() { parts.length = 0; texts.length = 0; rings.length = 0; }
+  function clear() { parts.length = 0; texts.length = 0; rings.length = 0; anims.length = 0; }
 
-  return { p, burst, blood, sparks, dust, ash, soulWisp, ring, text, update, draw, drawTexts, clear, parts };
+  return { p, burst, blood, sparks, dust, ash, soulWisp, ring, text, anim, update, draw, drawTexts, clear, parts };
 })();

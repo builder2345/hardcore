@@ -6,7 +6,7 @@ HC.Player = (function () {
 
   function create() {
     return {
-      x: 0, y: 0, w: 12, h: 26, vx: 0, vy: 0, facing: 1, onGround: false,
+      x: 0, y: 0, w: 14, h: 38, vx: 0, vy: 0, facing: 1, onGround: false,
       state: 'normal', hp: 100, sta: 100, jumpsUsed: 0, coyote: 0, jumpBuf: 0,
       dashT: 0, dashCd: 0, airDashUsed: false, staDelay: 0, iframe: 0, hurtT: 0,
       atk: null, comboStep: 0, comboWindow: 0, atkAnim: null,
@@ -337,8 +337,7 @@ HC.Player = (function () {
         HC.FX.ring(p.x + p.w / 2, p.y + p.h, 10, 'rgba(200,210,230,0.6)', 0.25, 1);
       }
     }
-    // 가변 점프 높이
-    if (ctl && I.up('jump') && p.vy < -160) p.vy *= 0.55;
+    // 메이플처럼 점프 높이는 고정 (짧게 눌러도 끝까지 뛴다)
 
     // 밧줄 잡기
     if (ctl && !p.atk && (I.held('up') || (I.held('down') && p.onGround))) {
@@ -427,16 +426,18 @@ HC.Player = (function () {
   function draw(ctx, p, cam, t) {
     if (p.dead) return;
     const ox = Math.round(p.x + p.w / 2 - cam.x), oy = Math.round(p.y + p.h - cam.y);
-    ctx.save();
-    ctx.translate(ox, oy);
-    if (p.facing < 0) ctx.scale(-1, 1);
-    if (p.iframe > 0 && p.state !== 'dash' && Math.floor(t * 20) % 2 === 0) ctx.globalAlpha = 0.45;
-    if (p.state === 'dash') ctx.globalAlpha = 0.6;
-    HC.Draw.player(ctx, p, t);
-    ctx.restore();
+    if (!HC.Draw.playerSprite(ctx, p, cam, t)) {
+      ctx.save();
+      ctx.translate(ox, oy);
+      if (p.facing < 0) ctx.scale(-1, 1);
+      if (p.iframe > 0 && p.state !== 'dash' && Math.floor(t * 20) % 2 === 0) ctx.globalAlpha = 0.45;
+      if (p.state === 'dash') ctx.globalAlpha = 0.6;
+      HC.Draw.player(ctx, p, t);
+      ctx.restore();
+    }
     ctx.globalAlpha = 1;
-    // 공격 궤적
-    if (p.atk) {
+    // 공격 궤적 (스프라이트가 없을 때만)
+    if (p.atk && !(HC.Assets.ready && HC.SPRITE_META.hero)) {
       const k = p.atk.t / p.atk.dur;
       if (k >= 0.3 && k <= 0.66) {
         const b = atkBox(p);

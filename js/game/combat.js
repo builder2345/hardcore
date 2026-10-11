@@ -108,6 +108,7 @@ HC.Combat = (function () {
       if (st.echo && Math.random() < st.echo && !e.dead) damageEnemy(e, Math.round(r.dmg * 0.6), { dir: p.facing, col: '#c0e0ff' });
       if (st.curse && Math.random() < st.curse[0]) e.status.vuln = { t: st.curse[2], v: st.curse[1] };
       HC.FX.sparks(U.cx(e) - p.facing * e.w * 0.3, box.y + box.h / 2, r.crit ? ['#ffe080', '#ffffff'] : ['#ffffff', '#d0d0d0'], r.crit ? 10 : 5);
+      HC.FX.anim('fxHit', U.cx(e) - p.facing * e.w * 0.25, box.y + box.h / 2 + 16, { scale: r.crit ? 1.2 : 0.8 });
       HC.FX.blood(U.cx(e), U.cy(e), p.facing, 4);
       any = true;
       HC.Audio.play('hit', r.crit);
@@ -154,7 +155,9 @@ HC.Combat = (function () {
   function kill(e) {
     const Gm = HC.G;
     e.dead = true; e.deathT = 0; e.cur = null;
-    HC.FX.ash(e.x, e.y, e.w, e.h, e.boss ? 120 : e.elite ? 50 : 20);
+    HC.FX.ash(e.x, e.y, e.w, e.h, e.boss ? 120 : e.elite ? 50 : 14);
+    const big = Math.max(e.w, e.h);
+    HC.FX.anim(e.def.corrupt ? 'fxDeath' : big > 60 ? 'fxBoom' : 'fxDeathS', e.x + e.w / 2, e.y + e.h + (big > 60 ? 10 : 4), { scale: Math.max(0.8, Math.min(3, big / 40)) });
     HC.Audio.play('kill');
     if (e.def.summonOnly && !e.boss) { HC.World.dropLoot(e, true); return; }
     HC.World.dropLoot(e);

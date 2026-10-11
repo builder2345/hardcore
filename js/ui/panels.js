@@ -225,7 +225,7 @@ HC.Panels = (function () {
       '<p class="t-eyebrow">하드코어 횡스크롤 생존기</p>' +
       '<h1 class="t-title">나락 강하</h1>' +
       '<p class="t-lead">한 달에 한 번, 강하 광장의 문이 열린다. 내려간 자는 층이 닫힐 때까지 살아남아야 돌아온다.<br>죽은 자는 가진 것을 전부 나락에 두고 온다.</p>' +
-      (howto ? controlsHtml() :
+      (!HC.Assets.ready ? '<p class="t-load">그림을 불러오는 중… <span id="load-pct">' + Math.round(HC.Assets.progress * 100) + '%</span></p>' : howto ? controlsHtml() :
         '<div class="t-btns">' +
         (has ? btn('이어하기', 'cont', '', { cls: 'primary' }) : '') +
         btn(confirmKey === 'new' ? '정말 처음부터? 기존 기록이 지워진다' : '새로 시작', 'newgame', '', { cls: has ? (confirmKey === 'new' ? 'danger' : '') : 'primary' }) +
@@ -749,5 +749,7 @@ HC.Panels = (function () {
     root.classList.add('show');
   }
 
-  return { init, open, close, render, hotkeys, title, isOpen, get cur() { return cur; } };
+  function loading(k) { const el = document.getElementById('load-pct'); if (el) el.textContent = Math.round(k * 100) + '%'; }
+
+  return { init, open, close, render, hotkeys, title, loading, isOpen, get cur() { return cur; } };
 })();

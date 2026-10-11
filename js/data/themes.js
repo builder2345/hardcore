@@ -7,7 +7,7 @@ HC.THEMES = {
   },
   cave: { // 1층 청석 동굴
     sky: ['#05070b', '#0a0f17', '#0c1420'], rock: '#1a2029', rockDark: '#0c0f14', lip: '#2c4a5c', lipHi: '#5fb6d6',
-    plat: '#2b2f36', platHi: '#45607a', rope: '#6d6352', dark: 0.9, fog: null, light: '#62c8ff', bg: 'cave', crystals: true,
+    plat: '#2b2f36', platHi: '#45607a', rope: '#6d6352', dark: 0.84, fog: null, light: '#62c8ff', bg: 'cave', crystals: true,
   },
   waste: { // 2층 잿바위 황무지
     sky: ['#140c0a', '#2a1712', '#4a2618'], rock: '#2d2420', rockDark: '#17110e', lip: '#5c4334', lipHi: '#94684a',

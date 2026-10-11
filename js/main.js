@@ -161,6 +161,7 @@ HC.Game = (function () {
     ctx.drawImage(z.canvas, -c.x, -c.y);
     drawPortals(ctx, c, t);
     HC.World.drawObjects(ctx, c, t);
+    if (G.scene === 'city') HC.City.drawNPCs(ctx, c, t);
     HC.World.drawDrops(ctx, c, t);
     for (const e of G.enemies) HC.Enemy.draw(ctx, e, c, t);
     HC.Player.draw(ctx, p, c, t);
@@ -341,6 +342,7 @@ HC.Game = (function () {
     HC.Panels.init();
     const s = HC.Save.load();
     HC.Panels.title(!!s);
+    HC.Assets.load((k) => HC.Panels.loading(k), () => HC.Panels.render());
     requestAnimationFrame((ts) => { last = ts; frame(ts); });
     window.addEventListener('beforeunload', () => {
       if (G.save) {

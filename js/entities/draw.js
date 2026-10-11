@@ -328,10 +328,34 @@ HC.Draw = (function () {
     if (gear.gloves) R(ctx, hx - 1, hy - 1, 3, 3, gear.glovesCol);
   }
 
+  // 몬스터 스프라이트 상태 → [애니메이션, 시작, 끝]
+  function artSpec(art, state) {
+    let spec = art.anims[state] || (state === 'hurt' ? art.anims.idle : null) || art.anims.walk || art.anims.idle;
+    if (typeof spec === 'string') return [spec, null, null];
+    return spec;
+  }
+  function spriteBody(ctx, e, cam, t, fx) {
+    if (!HC.Assets.ready) return false;
+    const art = HC.MOB_ART[e.def.baseId || e.def.id];
+    if (!art) return false;
+    let state = e.anim || 'idle';
+    if (e.spawnT > 0 && art.anims.spawn) state = 'spawn';
+    const [an, f0, f1] = artSpec(art, state);
+    let frame;
+    if (state === 'spawn') { const m = HC.Spr.meta(art.k, an); frame = m ? Math.min(m.n - 1, Math.floor((1 - e.spawnT / 0.6) * m.n)) : 0; }
+    else frame = HC.Spr.frameAt(art.k, an, e.animT * (state === 'attack' ? 1.4 : 1), f0, f1);
+    const tint = e.def.corrupt ? 'corrupt' : art.tint;
+    const x = e.x + e.w / 2 - cam.x, y = e.y + e.h - cam.y;
+    const alpha = (e.alpha != null ? e.alpha : 1) * (art.alpha || 1);
+    return HC.Spr.draw(ctx, art.k, an, frame, x, y, e.facing, { scale: (art.scale || 1) * (e.bodyScale || 1), tint, flash: fx && fx.flash, red: fx && fx.red, alpha });
+  }
+
   // e: 엔티티, kind = body.t
-  function body(ctx, e, cam, t) {
+  function body(ctx, e, cam, t, fx) {
+    if (spriteBody(ctx, e, cam, t, fx)) return;
     const b = e.def.body;
-    if (b.t === 'worm') { worm(ctx, e, b, t, cam); return; }
+    if (fx && (fx.flash || fx.red) && 'filter' in ctx) ctx.filter = fx.flash ? 'brightness(3)' : 'brightness(1.8) sepia(1) saturate(6) hue-rotate(-30deg)';
+    if (b.t === 'worm') { worm(ctx, e, b, t, cam); ctx.filter = 'none'; return; }
     const ox = Math.round(e.x + e.w / 2 - cam.x), oy = Math.round(e.y + e.h - cam.y);
     ctx.save();
     ctx.translate(ox, oy);
@@ -348,8 +372,32 @@ HC.Draw = (function () {
       default: R(ctx, -e.w / 2, -e.h, e.w, e.h, b.c);
     }
     ctx.restore();
+    if ('filter' in ctx) ctx.filter = 'none';
     ctx.globalAlpha = 1;
   }
 
-  return { body, player, weapon, R, eyeGlow };
+  // 플레이어 스프라이트 (고딕 영웅)
+  function playerSprite(ctx, p, cam, t) {
+    if (!HC.Assets.ready || !HC.SPRITE_META.hero) return false;
+    let an = 'idle', fr = 0;
+    const x = p.x + p.w / 2 - cam.x, y = p.y + p.h - cam.y;
+    if (p.state === 'climb') {
+      an = 'climb'; fr = 3 + (Math.floor(p.y / 10) % 3);
+    } else if (p.atkAnim && p.atk) {
+      const k = Math.min(0.999, p.atkAnim.t / p.atkAnim.dur);
+      if (p.atkAnim.air) { an = 'jumpAttack'; fr = 2 + Math.floor(k * 4); } else { an = 'attack'; fr = Math.floor(k * 6); }
+    } else if (p.atkAnim) { an = 'attack'; fr = 3 + (Math.floor(t * 20) % 3); }
+    else if (p.state === 'hurt') { an = 'hurt'; fr = Math.floor(t * 10) % 3; }
+    else if (p.state === 'dash') { an = 'run'; fr = 5; }
+    else if (p.drinking > 0) { an = 'crouch'; fr = 1; }
+    else if (!p.onGround) { an = 'jump'; fr = p.vy < -250 ? 0 : p.vy < -60 ? 1 : p.vy < 120 ? 2 : p.vy < 400 ? 3 : 4; }
+    else if (p.anim === 'walk') { an = 'run'; fr = HC.Spr.frameAt('hero', 'run', t); }
+    else { an = 'idle'; fr = HC.Spr.frameAt('hero', 'idle', t); }
+    const o = { scale: p.giant ? 1.35 : 1, tint: p.giant ? 'bronze' : null, flash: p.flash > 0 ? 0.7 : 0 };
+    if (p.iframe > 0 && p.state !== 'dash' && Math.floor(t * 20) % 2 === 0) o.alpha = 0.45;
+    if (p.state === 'dash') o.alpha = 0.65;
+    return HC.Spr.draw(ctx, 'hero', an, fr, x, y, p.facing, o);
+  }
+
+  return { body, player, playerSprite, weapon, R, eyeGlow };
 })();
