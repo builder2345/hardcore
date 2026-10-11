@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>나락 강하</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="game">
+  <canvas id="screen"></canvas>
+  <canvas id="overlay"></canvas>
+  <div id="hud" class="hidden">
+    <div id="hud-tl">
+      <div class="bar hp"><div id="hp-lag" class="lag"></div><div id="hp-fill" class="fill"></div><div id="shield-fill" class="shield"></div><span id="hp-txt"></span></div>
+      <div class="bar sta"><div id="sta-fill" class="fill"></div></div>
+      <div class="bar exp"><div id="exp-fill" class="fill"></div></div>
+      <div class="meta"><span id="lvl"></span></div>
+      <div id="status"></div>
+      <div id="buffs"></div>
+    </div>
+    <div id="hud-tc">
+      <div id="floor-name"></div>
+      <div id="clock"></div>
+      <div id="events"></div>
+    </div>
+    <div id="hud-tr"><div id="res"></div></div>
+    <div id="boss"><div class="boss-head"><span id="boss-tag"></span><span id="boss-name"></span></div><div class="bar boss-bar"><div id="boss-lag" class="lag"></div><div id="boss-fill" class="fill"></div></div></div>
+    <div id="log"></div>
+    <div id="hud-bc"><div id="skills"></div><div id="potion"></div></div>
+    <div id="keys">X 공격 · Z 회피 · Space 점프 · ↑ 밧줄/포탈 · Q 물약 · I 가방 · K 영혼 · M 지도 · Esc 메뉴</div>
+    <div id="toasts"></div>
+    <div id="banner"><div id="banner-title"></div><div id="banner-sub"></div></div>
+    <div id="zone-name"></div>
+  </div>
+  <div id="dmg-flash"></div>
+  <div id="fade"></div>
+  <div id="death"><h2>사망</h2><p id="death-sub"></p></div>
+  <div id="panel" class="panel" role="dialog" aria-modal="true"></div>
+  <div id="err" role="alert"></div>
+  <div id="touch-note">이 게임은 키보드로 한다. 데스크톱 브라우저에서 열어 줘.</div>
+</div>
+<script src="js/core/util.js"></script>
+<script src="js/core/input.js"></script>
+<script src="js/core/audio.js"></script>
+<script src="js/data/themes.js"></script>
+<script src="js/data/skills.js"></script>
+<script src="js/data/monsters.js"></script>
+<script src="js/data/floors.js"></script>
+<script src="js/data/items.js"></script>
+<script src="js/data/sub.js"></script>
+<script src="js/world/map.js"></script>
+<script src="js/world/physics.js"></script>
+<script src="js/world/render.js"></script>
+<script src="js/entities/fx.js"></script>
+<script src="js/entities/draw.js"></script>
+<script src="js/entities/player.js"></script>
+<script src="js/entities/enemy.js"></script>
+<script src="js/game/save.js"></script>
+<script src="js/game/stats.js"></script>
+<script src="js/game/combat.js"></script>
+<script src="js/game/skills.js"></script>
+<script src="js/game/world.js"></script>
+<script src="js/game/descent.js"></script>
+<script src="js/game/city.js"></script>
+<script src="js/game/sub.js"></script>
+<script src="js/ui/hud.js"></script>
+<script src="js/ui/panels.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
