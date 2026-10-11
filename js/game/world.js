@@ -232,7 +232,7 @@ HC.World = (function () {
         const colors = def.soul.colors;
         const ci = Math.floor(Math.random() * colors.length);
         addDrop('soul', cx, cy - 6, { id: def.baseId || def.id, color: ci, hex: colors[ci].hex, vy: -160 });
-        if (e.boss || e.elite) HC.UI.toast('영혼이 떨어졌다 — ' + soulName(def.baseId || def.id, ci), 2.5);
+        if (e.boss || e.elite) HC.UI.toast(U.josa(soulName(def.baseId || def.id, ci), '이', '가') + ' 떨어졌다', 2.5);
       }
     }
     // 재료
@@ -279,8 +279,12 @@ HC.World = (function () {
       if (d.type === 'soul' && Math.random() < 0.3) HC.FX.soulWisp(d.x + 3, d.y, d.hex || '#ffffff');
       if (p.dead) continue;
       const dist = U.dist(d.x + 3, d.y + 3, U.cx(p), U.cy(p));
-      if (d.t > 0.4 && dist < 60 && d.type === 'stone') { d.x += (U.cx(p) - d.x) * Math.min(1, dt * 8); d.y += (U.cy(p) - d.y) * Math.min(1, dt * 8); }
-      if (d.t > 0.35 && dist < 16) {
+      // 흑석은 멀리서도, 영혼과 유물은 가까이 가면 끌려온다 (재료는 가방 사정이 있어 직접 밟아야 한다)
+      const pull = d.type === 'stone' ? 60 : d.type === 'item' ? 0 : 34;
+      if (d.t > 0.4 && dist < pull) { d.x += (U.cx(p) - 3 - d.x) * Math.min(1, dt * 8); d.y += (U.cy(p) - 3 - d.y) * Math.min(1, dt * 8); }
+      // 몸통 상자와 겹치면 줍는다 (중심 거리로 재면 키 큰 캐릭터는 바닥 물건에 닿지 않는다)
+      const touch = U.overlap({ x: p.x - 4, y: p.y, w: p.w + 8, h: p.h + 2 }, d);
+      if (d.t > 0.35 && touch) {
         if (pickup(d)) G.drops.splice(i, 1);
       } else if (d.t > 90 && d.type !== 'soul' && d.type !== 'relic') G.drops.splice(i, 1);
     }
@@ -293,7 +297,7 @@ HC.World = (function () {
     if (d.type === 'soul') {
       run.orbs.push({ id: d.id, color: d.color });
       HC.Audio.play('soul');
-      HC.UI.banner('영혼 획득', soulName(d.id, d.color) + ' — [K]에서 흡수할 수 있다', d.hex || '#ffffff', 2.2);
+      HC.UI.banner(soulName(d.id, d.color), '주웠다. 흡수는 K 창에서 한다', d.hex || '#ffffff', 2.2);
       HC.UI.dirty = true;
       return true;
     }
@@ -302,7 +306,7 @@ HC.World = (function () {
       run.relics.push(d.id);
       HC.Audio.play('soul');
       const r = HC.RELICS[d.id];
-      HC.UI.banner('각인 유물 No.' + r.no, r.n + ' — ' + r.d, '#e0c080', 3);
+      HC.UI.banner('각인 유물 No.' + r.no, r.n + '. ' + r.d, '#e0c080', 3);
       return true;
     }
     if (d.type === 'item') {
