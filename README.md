@@ -65,6 +65,7 @@ js/game      전투, 스킬, 구역, 강하, 도시, 서브컨텐츠, 저장
 js/ui        HUD, 패널
 assets/      스프라이트 스트립, 타일셋, 배경, 소품 (CREDITS.md 참고)
 tools/build_assets.py  원본 에셋 팩에서 assets/를 다시 만드는 스크립트
+tools/build_artifact.py  CSS·JS를 한 페이지로 묶어 dist/naraak.html을 만드는 스크립트
 ```
 
 ## 에셋
